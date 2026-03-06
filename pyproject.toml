@@ -1,0 +1,38 @@
+[project]
+name = "de-batch-pipeline"
+version = "0.1.0"
+description = "Batch data engineering pipeline with Bronze/Silver/Gold layers using PySpark"
+readme = "README.md"
+requires-python = ">=3.12"
+
+authors = [
+  { name = "gardhani issaac" }
+]
+
+dependencies = [
+  "pyspark>=4.1.1",
+  "pyyaml>=6.0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-cov>=4.0.0",
+  "pandas>=2.0",
+]
+
+[project.scripts]
+run-pipeline = "job.pipeline:main"
+
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["job*", "tests*"]
+exclude = ["data*", "config*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --cov=job --cov-report=term-missing"
